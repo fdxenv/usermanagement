@@ -1,0 +1,198 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "User Enrollment "
+basePath: "/app/v1"
+schemes:
+- "https"
+paths:
+  /users:
+      post:
+        # This API is used to enroll a new user 
+        tags:
+        - "User Management"
+        summary: "To create a new user"
+        description: "<font size='2px' color='grey' face='Georgia,serif'>To create a new user.</br></br><b>Sample Input</b><pre><p>{<br>“loginName”: john@gmail.com</a>&quot;,<br>“loginPassword”: “Test12345”,<br>“userType”: 1,<br>“firstName”: “John”,<br>“lastName”: “Doe”,<br>“userCodes”: [<br>{<br>“codeType”: 1,<br>“code”: “ADV25”<br>}<br>],<br>“userPreferences”: {<br>“realtimeQuotes”: “Y”,<br>“delayedQuotes”: “Y”<br>}<br>}</p></pre><br/>Sample Response</b><p>{<br><pre>“success”: true,<br>“userId”: 12345<br>}</p></font>"
+        "deprecated" : false
+        parameters:
+        - in: body
+          name: body
+          description: Create a new user
+          required: true
+          schema:
+            $ref: '#/definitions/user'  
+        responses:
+          200:
+            description: "successful operation"
+            schema:
+              $ref: "#/definitions/userResponse"
+          400:
+           description: "Bad Request"
+            #F8005 Missing required field $1
+            #F8004 Invalid value for $1
+            #F0002 API Credentials authorization messages
+            #F0006 Authorization related 
+           schema:
+            $ref: "#/definitions/ApiErrors"
+  
+  /users/{userId}:    
+      get:
+        # This API is used to get user details
+        tags:
+        - "User Management"
+        summary: "To get user details"
+        description: "<font size='2px' color='grey' face='Georgia,serif'>To create a new user.</br></br><b>Sample Input</b><pre><p></b><pre>/12345</pre><br/></p></pre><br/>Sample Response</b><p>{<br>“loginName”: john@gmail.com</a>&quot;,<br>“loginPassword”: “Test12345”,<br>“userType”: 1,<br>“firstName”: “John”,<br>“lastName”: “Doe”,<br>“userCodes”: [<br>{<br>“codeType”: 1,<br>“code”: “ADV25”<br>}<br>],<br>“userPreferences”: {<br>“realtimeQuotes”: “Y”,<br>“delayedQuotes”: “Y”<br>}</p></font>"
+        "deprecated" : false  
+        parameters:
+        - in: path
+          name: userId
+          type: integer
+          format: int64
+          required: true
+        responses:
+          200:
+            description: "successful operation"
+            schema:
+              $ref: "#/definitions/userDetails"
+          400:
+           description: "Bad Request"
+            #F8005 Missing required field $1
+            #F8004 Invalid value for $1
+            #F0002 API Credentials authorization messages
+            #F0006 Authorization related 
+           schema:
+            $ref: "#/definitions/ApiErrors"
+definitions:
+    user:
+      type: "object"
+      required: [
+          loginName,
+          loginPassword,
+          userType
+      ]
+      properties:
+        userId:
+          type: integer
+          format: int64
+          description: >
+            User Id
+          example: 12345
+          readOnly: true
+        loginName:
+          type: "string"  
+          description: >
+            User Login Name
+          example: "John@gmail.com"
+        loginPassword:
+          type: "string"  
+          description: >
+            User Login Password
+          example: "Test12345"   
+        userType:
+          type: integer
+          enum: [1,2,3,4,5]
+          description: >
+            Type of the user
+            <br>
+            * `1` - Sponsor <br>
+            * `2` - Advisor <br>
+            * `3` - Branch <br>
+            * `4` - Area <br>
+            * `5` - Region <br>
+            example: "1"
+        firstName:
+          type: string
+          description: >
+            User First Name
+          example: "John"  
+        lastName:
+          type: string
+          description: >
+            User Last Name
+          example: "Doe"  
+          
+        userCodes:
+          type: "array"
+          minItems: 0
+          maxItems: 25
+          items:
+            $ref: "#/definitions/userCodes"   
+        userPreferences:
+           $ref: "#/definitions/userPreferences"  
+    
+    userCodes:
+      type: "object"
+      properties:
+        codeType:
+          type: integer
+          enum: [1,2,3,4,5]
+          description: >
+            Code Type
+            <br>
+            * `1` - Sponsor <br>
+            * `2` - Advisor <br>
+            * `3` - Branch <br>
+            * `4` - Area <br>
+            * `5` - Region <br>
+          example: 1  
+        code:
+          type: string
+          description: >
+            User Code like IA/Branch/Area/Region
+          example: ADV25  
+    
+    userPreferences:
+      type: "object"
+      properties:
+        realtimeQuotes:
+          type: string
+          description: >
+            Real time quotes Enabled
+          example: Y 
+        delayedQuotes:
+          type: string
+          description: >
+            Delayed quotes Enabled
+          example: Y   
+    
+    userDetails:
+      type: object
+      properties:
+        success: 
+          type: string
+          example: true
+        user:
+          $ref: "#/definitions/user" 
+    ApiErrors:
+      type: "object"
+      properties:
+        success:
+          type: string
+          default: "false"
+        ApiError:
+          type: "array"
+          items:
+              $ref: "#/definitions/ApiError" 
+    ApiError:
+      type: "object"
+      properties:
+        code:
+          type: "string"
+        message:
+          type: "string"
+        locale:
+          type: "string"
+        link:
+          type: "string"  
+          
+    userResponse:
+      type: "object"
+      properties:
+        success:
+         type: string
+         example: true
+        userId:
+          type: integer
+          format: int64
+          example: 12345
+       
