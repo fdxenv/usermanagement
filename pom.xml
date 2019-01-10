@@ -19,7 +19,19 @@
 		<springfox-version>2.7.0</springfox-version>
 		<log4j.version>1.2.17</log4j.version>
 	</properties>
-
+	
+	<distributionManagement>
+	  <repository>
+	      <uniqueVersion>false</uniqueVersion>
+	      <id>xcard-releases</id>
+	      <url>http://ec2-35-163-33-71.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/usermanagement-releases</url>
+	  </repository>
+	  <snapshotRepository>
+	      <uniqueVersion>true</uniqueVersion>
+	      <id>xcard-snapshots</id>
+	      <url>http://ec2-35-163-33-71.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/usermanagement-snapshot</url>
+	  </snapshotRepository>
+	</distributionManagement>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
