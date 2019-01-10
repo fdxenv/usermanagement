@@ -23,12 +23,12 @@
 	<distributionManagement>
 	  <repository>
 	      <uniqueVersion>false</uniqueVersion>
-	      <id>xcard-releases</id>
+	      <id>usermanagement-releases</id>
 	      <url>http://ec2-35-163-33-71.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/usermanagement-releases</url>
 	  </repository>
 	  <snapshotRepository>
 	      <uniqueVersion>true</uniqueVersion>
-	      <id>xcard-snapshots</id>
+	      <id>usermanagement-snapshots</id>
 	      <url>http://ec2-35-163-33-71.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/usermanagement-snapshot</url>
 	  </snapshotRepository>
 	</distributionManagement>
