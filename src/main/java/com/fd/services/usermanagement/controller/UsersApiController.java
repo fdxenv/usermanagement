@@ -42,7 +42,7 @@ public class UsersApiController implements UsersApi {
         this.request = request;
     }
    
-    public ResponseEntity<UserResponse> usersPost(@ApiParam(value = "Create a new user" ,required=true )  @Valid @RequestBody UserDTO body) {
+    public ResponseEntity<UserResponse> addUser(@ApiParam(value = "Create a new user" ,required=true )  @Valid @RequestBody UserDTO body) {
     	
     	
     	
@@ -71,7 +71,7 @@ public class UsersApiController implements UsersApi {
         
     }
 
-    public ResponseEntity<UserDetails> usersUserIdGet(@ApiParam(value = "",required=true) @PathVariable("userId") Long userId) {
+    public ResponseEntity<UserDetails> getUser(@ApiParam(value = "",required=true) @PathVariable("userId") Long userId) {
     	
     	
     	 String accept = request.getHeader("Accept");

@@ -18,21 +18,8 @@
 		<java.version>1.8</java.version>
 		<springfox-version>2.7.0</springfox-version>
 		<log4j.version>1.2.17</log4j.version>
-		<jacoco.version>0.7.9</jacoco.version>
 	</properties>
-	
-	<distributionManagement>
-	  <repository>
-	      <uniqueVersion>false</uniqueVersion>
-	      <id>usermanagement-releases</id>
-	      <url>http://ip-172-31-39-6.us-west-2.compute.internal:8081/nexus/content/repositories/usermanagement-releases</url>
-	  </repository>
-	  <snapshotRepository>
-	      <uniqueVersion>true</uniqueVersion>
-	      <id>usermanagement-snapshots</id>
-	      <url>http://ip-172-31-39-6.us-west-2.compute.internal:8081/nexus/content/repositories/usermanagement-snapshot</url>
-	  </snapshotRepository>
-	</distributionManagement>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -112,45 +99,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.version}</version>
-				<executions>
-					<execution>
-						<id>prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>post-unit-test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<!-- Sets the path to the file which contains the execution data. -->
-
-							<dataFile>target/jacoco.exec</dataFile>
-							<!-- Sets the output directory for the code coverage report. -->
-							<outputDirectory>target/jacoco-ut</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<systemPropertyVariables>
-						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-					</systemPropertyVariables>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

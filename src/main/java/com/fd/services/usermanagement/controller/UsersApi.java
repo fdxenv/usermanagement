@@ -35,7 +35,7 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "Bad Request", response = ApiErrors.class) })
     @RequestMapping(value = "/app/v1/users",
         method = RequestMethod.POST)
-    ResponseEntity<UserResponse> usersPost(@ApiParam(value = "Create a new user" ,required=true )  @Valid @RequestBody UserDTO body);
+    ResponseEntity<UserResponse> addUser(@ApiParam(value = "Create a new user" ,required=true )  @Valid @RequestBody UserDTO body);
 
 
     @ApiOperation(value = "To get user details", nickname = "usersUserIdGet", notes = "<font size='2px' color='grey' face='Georgia,serif'>To create a new user.</br></br><b>Sample Input</b><pre><p></b><pre>/12345</pre><br/></p></pre><br/>Sample Response</b><p>{<br>“loginName”: john@gmail.com</a>&quot;,<br>“loginPassword”: “Test12345”,<br>“userType”: 1,<br>“firstName”: “John”,<br>“lastName”: “Doe”,<br>“userCodes”: [<br>{<br>“codeType”: 1,<br>“code”: “ADV25”<br>}<br>],<br>“userPreferences”: {<br>“realtimeQuotes”: “Y”,<br>“delayedQuotes”: “Y”<br>}</p></font>", response = UserDetails.class, tags={ "User Management", })
@@ -44,6 +44,6 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "Bad Request", response = ApiErrors.class) })
     @RequestMapping(value = "/app/v1//users/{userId}",
         method = RequestMethod.GET)
-    ResponseEntity<UserDetails> usersUserIdGet(@ApiParam(value = "",required=true) @PathVariable("userId") Long userId);
+    ResponseEntity<UserDetails> getUser(@ApiParam(value = "",required=true) @PathVariable("userId") Long userId);
 
 }
